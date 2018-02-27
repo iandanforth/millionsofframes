@@ -14,6 +14,9 @@ import { reducer as resetCounterReducer } from './resetCounter';
 import { reducer as fetchRedditReactjsListReducer } from './fetchRedditReactjsList';
 import { reducer as updateAgeReducer } from './updateAge';
 import { reducer as incrementFooReducer } from './incrementFoo';
+import { reducer as updateFpsReducer } from './updateFps';
+import { reducer as incrementShameReducer } from './incrementShame';
+import { reducer as toggleSliderReducer } from './toggleSlider';
 
 const reducers = [
   counterPlusOneReducer,
@@ -22,6 +25,9 @@ const reducers = [
   fetchRedditReactjsListReducer,
   updateAgeReducer,
   incrementFooReducer,
+  updateFpsReducer,
+  incrementShameReducer,
+  toggleSliderReducer,
 ];
 
 export default function reducer(state = initialState, action) {

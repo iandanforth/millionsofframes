@@ -4,25 +4,119 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 
+import classNames from 'classnames';
+import Slider from 'react-rangeslider';
+
 export class MillionsOfFrames extends Component {
+  constructor() {
+    super();
+    this.nextInsult = this.nextInsult.bind(this);
+  }
+
   static propTypes = {
     home: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
   };
 
+  get insults() {
+    return [
+      'balance a double pendulum.',
+      'do parkour.',
+      'solve XOR.',
+      'beat a Chess Grandmaster.',
+      'beat a 9-Dan Go player.',
+      'do a backflip.',
+      'fly (inverted).',
+    ];
+  }
+
+  get frameCount() {
+    const { age, fps } = this.props.home;
+    let count = ((age * 365 * 16 * 60 * 60 * fps) / 10**6);
+    return count;
+  }
+
+  get displayCount() {
+    let count = this.frameCount;
+    if (count > 1000) {
+      count /= 1000;
+    }
+    if (count > 1000) {
+      count /= 1000;
+    }
+
+    count = count.toFixed(2);
+    return count;
+  }
+
+  get quantWord() {
+    if (this.frameCount > 10**6) {
+      return 'trillion';
+    } else if (this.frameCount > 10**3) {
+      return 'billion';
+    }
+    return 'million';
+  }
+
+  get buttonText() {
+    const { shameIndex } = this.props.home;
+    if (shameIndex < this.insults.length - 1){
+      return 'Yes I can!';
+    }
+
+    return "No you can't."
+  }
+
+  nextInsult() {
+    const { incrementShame } = this.props.actions;
+    const { shameIndex } = this.props.home;
+    if (shameIndex < this.insults.length - 1){
+      incrementShame();
+    } else {
+      return;
+    }
+  }
+
   render() {
-    const { age } = this.props.home;
-    const { updateAge } = this.props.actions;
-    let mcount = ((age * 365 * 24 * 60 * 60 * 24) / 1000000) * (2/3);
-    mcount = mcount.toFixed(2);
+    const { age, fps, shameIndex, showSlider } = this.props.home;
+    const { updateAge, updateFps, toggleSlider } = this.props.actions;
+
+    const sliderClasses = classNames({
+      "slider-container": true,
+      hidden: !showSlider
+    });
+
+    const fpsTextClasses = classNames({
+      "fps-text": true,
+      "fps-text-margin": !showSlider
+    });
     return (
       <div className="home-millions-of-frames">
-        <div className="enter-age-text">Enter your age:</div>
-        <input className="age-input" type="text" value={age} onChange={(updateAge)}></input>
-        <div className="million-text">
-          You have seen { mcount } million frames.
+        <div className="enter-age-text">Enter your age:
+          <input className="age-input" type="text" value={age} onChange={(updateAge)}></input>
         </div>
-        <div className="caveat-text">*Based on an 24fps perception rate.</div>
+        <div className={fpsTextClasses}> Assuming human vision is the equivalent of <span onClick={toggleSlider}>{ fps }</span> frames per second
+        </div>
+        <div className={sliderClasses}>
+          <Slider
+              min={0}
+              max={200}
+              step={1}
+              value={fps}
+              tooltip={false}
+              labels={{0: "0", 100: "100", 200: "200"}}
+              onChange={updateFps}
+          />
+        </div>
+        <div className="million-text">
+          You have seen { this.displayCount } {this.quantWord}
+        </div>
+        <div className="million-text">
+          frames.
+        </div>
+        <div className="caveat-text">*Based on 16 hours of awake time per day.</div>
+        <div className="shame-text">And you can't even {this.insults[shameIndex]} </div>
+        <button onClick={this.nextInsult}>{this.buttonText}</button>
       </div>
     );
   }

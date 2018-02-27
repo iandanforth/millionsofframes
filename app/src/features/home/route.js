@@ -10,11 +10,7 @@ export default {
   path: '/',
   name: 'Home',
   childRoutes: [
-    { path: 'default-page',
-      name: 'Default page',
-      component: DefaultPage,
-      isIndex: true,
-    },
-    { path: 'millions-of-frames', name: 'Millions of frames', component: MillionsOfFrames },
+    { path: 'millions-of-frames', name: 'Millions of frames', component: MillionsOfFrames, isIndex: true, },
+    { path: 'default-page', name: 'Default page', component: DefaultPage },
   ],
 };

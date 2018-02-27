@@ -8,6 +8,9 @@
 const initialState = {
   count: 10,
   age: 18,
+  fps: 24,
+  shameIndex: 0,
+  showSlider: false,
   redditReactjsList: [],
   fetchRedditReactjsListError: null,
   fetchRedditReactjsListPending: false,
