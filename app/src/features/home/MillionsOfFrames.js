@@ -116,7 +116,12 @@ export class MillionsOfFrames extends Component {
         </div>
         <div className="caveat-text">*Based on 16 hours of awake time per day.</div>
         <div className="shame-text">And you can't even {this.insults[shameIndex]} </div>
-        <button onClick={this.nextInsult}>{this.buttonText}</button>
+        <button className="yes-I-can-button" onClick={this.nextInsult}>{this.buttonText}</button>
+        <footer>
+          <hr/>
+          millionsofframes.com is a mini-project by <a target="_blank" href="https://github.com/iandanforth">Ian Danforth</a>{' '}
+          created with <a target="_blank" href="http://rekit.js.org">Rekit</a> and hosted by <a target="_blank" href="https://netlify.com">Netlify</a>
+        </footer>
       </div>
     );
   }
