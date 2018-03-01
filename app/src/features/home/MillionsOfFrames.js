@@ -90,12 +90,18 @@ export class MillionsOfFrames extends Component {
       "fps-text": true,
       "fps-text-margin": !showSlider
     });
+
+    const beNiceClasses = classNames({
+      "be-nice-text": true,
+      hidden: !(shameIndex == this.insults.length - 1)
+    });
     return (
       <div className="home-millions-of-frames">
-        <div className="enter-age-text">Enter your age:
+        <div className="enter-age-text">Enter your age
           <input className="age-input" type="text" value={age} onChange={(updateAge)}></input>
         </div>
-        <div className={fpsTextClasses}> Assuming human vision is the equivalent of <span onClick={toggleSlider}>{ fps }</span> frames per second
+        <div className={fpsTextClasses}>
+          Assuming human vision is the equivalent of <span onClick={toggleSlider}>{ fps }</span> frames per second:
         </div>
         <div className={sliderClasses}>
           <Slider
@@ -109,14 +115,20 @@ export class MillionsOfFrames extends Component {
           />
         </div>
         <div className="million-text">
-          You have seen { this.displayCount } {this.quantWord}
+          <div>You have seen</div>
+          <div className="million-num">{ this.displayCount } {this.quantWord} </div>
+        <div>frames.</div>
         </div>
-        <div className="million-text">
-          frames.
-        </div>
+
         <div className="caveat-text">*Based on 16 hours of awake time per day.</div>
-        <div className="shame-text">And you can't even {this.insults[shameIndex]} </div>
-        <button className="yes-I-can-button" onClick={this.nextInsult}>{this.buttonText}</button>
+        <div className="shame-text">
+          <div>And you can't even </div>
+          <div>{this.insults[shameIndex]}</div>
+        </div>
+        <div className="yes-I-can-container">
+          <button className="yes-I-can-button" onClick={this.nextInsult}>{this.buttonText}</button>
+        </div>
+        <div className={beNiceClasses}>So be nice to your agents.</div>
         <footer>
           <hr/>
           millionsofframes.com is a mini-project by <a target="_blank" href="https://github.com/iandanforth">Ian Danforth</a>{' '}

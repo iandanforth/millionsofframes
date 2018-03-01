@@ -6,16 +6,23 @@ import {
   HOME_UPDATE_AGE,
 } from './constants';
 
-export function updateAge(e) {
-  let age = e.target.value;
-  if (age < 0) {
-    age = 0;
-  } else if (age > 100) {
-    age = 100;
+function filterInput(age, nextAge) {
+  if (!isNaN(nextAge)) {
+    if (nextAge > 100) {
+      age = 100;
+    } else if (nextAge < 0 ) {
+      age = 0;
+    } else {
+      age = nextAge;
+    }
   }
+  return age;
+}
+
+export function updateAge(e) {
   return {
     type: HOME_UPDATE_AGE,
-    age: age
+    age: e.target.value
   };
 }
 
@@ -25,7 +32,7 @@ export function reducer(state, action) {
       console.log(action);
       return {
         ...state,
-        age: action.age
+        age: filterInput(state.age, action.age)
       };
 
     default:
