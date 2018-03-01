@@ -97,38 +97,40 @@ export class MillionsOfFrames extends Component {
     });
     return (
       <div className="home-millions-of-frames">
-        <div className="enter-age-text">Enter your age
-          <input className="age-input" type="text" value={age} onChange={(updateAge)}></input>
-        </div>
-        <div className={fpsTextClasses}>
-          Assuming human vision is the equivalent of <span onClick={toggleSlider}>{ fps }</span> frames per second:
-        </div>
-        <div className={sliderClasses}>
-          <Slider
-              min={0}
-              max={200}
-              step={1}
-              value={fps}
-              tooltip={false}
-              labels={{0: "0", 100: "100", 200: "200"}}
-              onChange={updateFps}
-          />
-        </div>
-        <div className="million-text">
-          <div>You have seen</div>
-          <div className="million-num">{ this.displayCount } {this.quantWord} </div>
-        <div>frames.</div>
-        </div>
+        <div>
+          <div className="enter-age-text">Enter your age
+            <input className="age-input" type="text" value={age} onChange={(updateAge)}></input>
+          </div>
+          <div className={fpsTextClasses}>
+            Assuming human vision is the equivalent of <span onClick={toggleSlider}>{ fps }</span> frames per second:
+          </div>
+          <div className={sliderClasses}>
+            <Slider
+                min={0}
+                max={200}
+                step={1}
+                value={fps}
+                tooltip={false}
+                labels={{0: "0", 100: "100", 200: "200"}}
+                onChange={updateFps}
+            />
+          </div>
+          <div className="million-text">
+            <div>You have seen</div>
+            <div className="million-num">{ this.displayCount } {this.quantWord} </div>
+          <div>frames.</div>
+          </div>
 
-        <div className="caveat-text">*Based on 16 hours of awake time per day.</div>
-        <div className="shame-text">
-          <div>And you can't even </div>
-          <div>{this.insults[shameIndex]}</div>
+          <div className="caveat-text">*Based on 16 hours of awake time per day.</div>
+          <div className="shame-text">
+            <div>And you can't even </div>
+            <div>{this.insults[shameIndex]}</div>
+          </div>
+          <div className="yes-I-can-container">
+            <button className="yes-I-can-button" onClick={this.nextInsult}>{this.buttonText}</button>
+          </div>
+          <div className={beNiceClasses}>So be nice to your agents.</div>
         </div>
-        <div className="yes-I-can-container">
-          <button className="yes-I-can-button" onClick={this.nextInsult}>{this.buttonText}</button>
-        </div>
-        <div className={beNiceClasses}>So be nice to your agents.</div>
         <footer>
           <hr/>
           millionsofframes.com is a mini-project by <a target="_blank" href="https://github.com/iandanforth">Ian Danforth</a>{' '}
