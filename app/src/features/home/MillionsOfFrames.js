@@ -78,8 +78,17 @@ export class MillionsOfFrames extends Component {
   }
 
   render() {
-    const { age, fps, shameIndex, showSlider } = this.props.home;
-    const { updateAge, updateFps, toggleSlider } = this.props.actions;
+    const {
+      age,
+      fps,
+      shameIndex,
+      showSlider
+    } = this.props.home;
+    const {
+      updateAge,
+      updateFps,
+      toggleSlider
+    } = this.props.actions;
 
     const sliderClasses = classNames({
       "slider-container": true,
@@ -106,13 +115,13 @@ export class MillionsOfFrames extends Component {
           </div>
           <div className={sliderClasses}>
             <Slider
-                min={0}
-                max={200}
-                step={1}
-                value={fps}
-                tooltip={false}
-                labels={{0: "0", 100: "100", 200: "200"}}
-                onChange={updateFps}
+              min={0}
+              max={200}
+              step={1}
+              value={fps}
+              tooltip={false}
+              labels={{0: "0", 100: "100", 200: "200"}}
+              onChange={updateFps}
             />
           </div>
           <div className="million-text">
